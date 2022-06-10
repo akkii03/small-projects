@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        .main{
+            display: grid;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding-top: 200px;
+        }
+        .btns{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .designbtn{
+            font-size: x-large;
+            border-radius: 12px;
+            margin-right: 12px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        .designbtn:hover{
+            background-color: grey;
+        }
+      
+
+        #display{
+            padding-left: 60px;
+            color:black;
+            font-size: 300px;
+            font-weight: bolder;
+            font-style: italic;   
+        }
+
+        .disable{
+            cursor: not-allowed;
+            opacity: 0 6;
+            background-color: grey;
+            color: black;
+            font-size: x-large;
+            border-radius: 12px;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="display">00:00:00</div>
+        <br><br>
+       <div class="btns">
+        <button id="start" class="designbtn" onclick="start()">Start</button>
+        <button id="pause"  class="disable"  onclick="pause()">Pause</button>
+        <button id="stop"  class="disable"   onclick="stopfun()">Stop</button>
+       </div>
+    </div>
+</body>
+
+<script>
+const startbtn = document.getElementById('start');
+const pausebtn = document.getElementById('pause');
+const stopbtn = document.getElementById('stop');
+let display = document.getElementById('display');
+
+let hh = 0;
+let mm = 0;
+let ss = 0;
+let stop = false;
+
+function timerInc () {
+    if(stop==false) {
+        ss = ss+1;
+    if(ss==60) {
+        mm = mm+1;
+        ss = 0;
+    }
+
+    if(mm==60) {
+        hh = hh+1;
+        mm = 0;
+        ss = 0;
+    }
+    display.innerHTML = hh+':'+mm+':'+ss;
+    setTimeout("timerInc()",1000)
+    }
+}
+
+    function start () {
+        
+        stopbtn.classList.remove('disable');
+        stopbtn.setAttribute('class','designbtn');
+        startbtn.setAttribute('class','disable');
+        startbtn.setAttribute('disabled','disabled');
+        pausebtn.classList.remove('disable');
+        pausebtn.setAttribute('class','designbtn');
+        stop = false;
+        timerInc();  
+    }
+
+
+    function pause() {
+
+        
+        if(pausebtn.innerText=="Pause") {
+            pausebtn.innerText = "Continue";
+            stop = true;
+        }
+        else{
+            pausebtn.innerText = "Pause";
+            stop = false;
+            timerInc();
+        }
+    }
+
+    function stopfun() {
+       startbtn.classList.remove('disable');
+       startbtn.setAttribute('class','designbtn');
+       pausebtn.setAttribute('class','disable');
+       stopbtn.setAttribute('class','disable');
+        display.innerText = "00:00:00";
+        stop  = true; 
+
+    }
+</script>
+
+</html>

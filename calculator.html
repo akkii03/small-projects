@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #numbers{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 4px;   
+}
+
+
+#operations{
+    display:flex;
+    padding-left: 100px;  
+}
+#input{
+    border: 2px solid black;
+    width: 300px;
+    height: 20px;
+}
+    </style>
+</head>
+<body>
+    <h3> Calculator</h3>
+    <div id="main"> 
+       <div id="input"></div>
+        <div id="numbers"> 
+            <button id="block0" > 0</button>
+            <button id="block1"> 1</button>
+            <button id="block2"> 2</button>
+            <button id="block3" > 3</button>
+            <button id="block4"> 4</button>
+            <button id="block5"> 5</button>
+            <button id="block6"> 6</button>
+            <button id="block7"> 7</button>
+            <button id="block8"> 8</button>
+            <button id="block9"> 9</button>
+            <button id="clear"> clear / reset</button>
+            <button id="calculate"> calculate</button>
+            </div> 
+            <div id="operations"> 
+            <button id="dot"><b>. </button>
+            <button id="plus"><b>+ </button>
+            <button id="minus"><b>- </button>
+            <button id="divide"><b>/ </button>
+            <button id="multiply"><b>*</button>
+
+            </div>
+    </div>
+</body>
+<script>
+    let display = document.getElementById('input');
+    let btn = Array.from(document.getElementsByTagName('button'));    
+    
+    btn.map(btn=>{
+        btn.addEventListener('click', (e)=>{
+            switch (e.target.innerText){
+                case 'clear / reset':
+                    display.innerText = "";
+                    break;
+
+                    case 'calculate':
+                    try{
+                        display.innerText = eval(display.innerText);
+                    }
+                    catch{
+                        display.innerText ="Sorry Invalid expression ";
+                    }
+                    break;
+                    
+
+                default:
+                    display.innerText += e.target.innerText;
+            }
+        })
+    });
+ 
+
+</script>
+</html>
